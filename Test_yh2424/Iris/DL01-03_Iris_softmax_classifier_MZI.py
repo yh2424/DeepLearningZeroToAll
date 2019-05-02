@@ -1,7 +1,14 @@
 # Lab 6 Softmax Classifier
+from Phase_shifters import ps
+
 import tensorflow as tf
 import numpy as np
 import matplotlib.pyplot as plt
+
+
+# Si Photonic device
+device = ps()
+
 
 tf.set_random_seed(777)  # for reproducibility
 
@@ -42,6 +49,8 @@ hypothesis = tf.nn.softmax(logits)
 cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits_v2(logits=logits,
                                                                  labels=tf.stop_gradient([Y_one_hot])))
 optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.1).minimize(cost)
+
+
 
 prediction = tf.argmax(hypothesis, 1)
 correct_prediction = tf.equal(prediction, tf.argmax(Y_one_hot, 1))

@@ -6,8 +6,8 @@ import matplotlib.pyplot as plt
 tf.set_random_seed(777)  # for reproducibility
 
 # Predicting animal type based on various features
-xy = np.loadtxt("Test_yh2424/Iris/data-01_iris_edited.csv", delimiter=',', dtype=np.float32)
-# xy = np.loadtxt("data-01_iris_edited.csv", delimiter=',', dtype=np.float32)
+# xy = np.loadtxt("Test_yh2424/Iris/data-01_iris_edited.csv", delimiter=',', dtype=np.float32)
+xy = np.loadtxt("data-01_iris_edited.csv", delimiter=',', dtype=np.float32)
 x_data = xy[:, 0:-1]
 y_data = xy[:, [-1]]
 
@@ -41,6 +41,7 @@ hypothesis = tf.nn.softmax(logits)
 # Cross entropy cost/loss
 cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits_v2(logits=logits,
                                                                  labels=tf.stop_gradient([Y_one_hot])))
+
 optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.1).minimize(cost)
 
 prediction = tf.argmax(hypothesis, 1)
